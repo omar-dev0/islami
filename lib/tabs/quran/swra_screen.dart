@@ -33,7 +33,7 @@ class _SwraScreenState extends State<SwraScreen> {
             automaticallyImplyLeading: false,
           ),
           body: swra.isEmpty
-              ? const Center(child: CircularProgressIndicator())
+              ? CircularProgressIndicator()
               : Card(
                   color: Colors.white,
                   surfaceTintColor: Colors.white,
@@ -98,7 +98,7 @@ class _SwraScreenState extends State<SwraScreen> {
     for (int i = 0; i < content.length; i++) {
       swra = swra.replaceFirst('\n', '{${i + 1}} ');
     }
-    swra += ' {${content.length}} ';
+    swra += '{${content.length}} ';
     setState(() {});
   }
 }
