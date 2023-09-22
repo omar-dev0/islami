@@ -124,7 +124,7 @@ class Quran extends StatelessWidget {
       "الفلق",
       "الناس"
     ];
-    List<int> ayatNumbers = [
+    const List<int> ayatNumbers = [
       7,
       286,
       200,
