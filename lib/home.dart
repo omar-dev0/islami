@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:islami/tabs/hadeth/hadeth_tab.dart';
 import 'package:islami/tabs/quran/quran.dart';
+import 'package:islami/tabs/sebha/sebha_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "homescreen";
@@ -46,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
         label: 'الراديو',
       ),
     ];
-    List<Widget> tabs = [Quran(), Hadeth()];
+    List<Widget> tabs = [Quran(), Hadeth(), TasbehTab()];
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
