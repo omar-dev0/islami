@@ -47,7 +47,11 @@ class _HomeScreenState extends State<HomeScreen> {
         label: 'الراديو',
       ),
     ];
-    List<Widget> tabs = [Quran(), Hadeth(), TasbehTab()];
+    List<Widget> tabs = [
+      Quran(),
+      Hadeth(),
+      TasbehTab(),
+    ];
     return Container(
       decoration: const BoxDecoration(
           image: DecorationImage(
