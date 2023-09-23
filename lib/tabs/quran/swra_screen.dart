@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:islami/Data/Swra_Data.dart';
+import 'package:islami/Thems/dark_them.dart';
 
 class SwraScreen extends StatefulWidget {
   static const route = "swraScreen";
@@ -25,7 +26,9 @@ class _SwraScreenState extends State<SwraScreen> {
       child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('assets/images/bglight.png'),
+                image: AssetImage(DarkThem.isDark
+                    ? 'assets/images/dark.png'
+                    : 'assets/images/bglight.png'),
                 fit: BoxFit.cover)),
         child: Scaffold(
           appBar: AppBar(
@@ -35,30 +38,29 @@ class _SwraScreenState extends State<SwraScreen> {
           body: swra.isEmpty
               ? const Center(child: CircularProgressIndicator())
               : Card(
-                  color: Colors.white,
-                  surfaceTintColor: Colors.white,
-                  margin: EdgeInsets.only(
-                      top: 30, bottom: 100, right: 20, left: 20),
-                  elevation: 1,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
                   child: Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           IconButton(
-                              onPressed: () {}, icon: Icon(Icons.play_circle)),
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.play_circle,
+                                color: Theme.of(context).colorScheme.secondary,
+                              )),
                           SizedBox(
                             width: 6,
                           ),
-                          Text(
-                            args.name,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 25,
-                            ),
-                          ),
+                          Text(args.name,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .secondary)),
                         ],
                       ),
                       SizedBox(
@@ -67,7 +69,7 @@ class _SwraScreenState extends State<SwraScreen> {
                       Container(
                         width: 240,
                         height: 1,
-                        color: Theme.of(context).primaryColor,
+                        color: Theme.of(context).colorScheme.background,
                       ),
                       SizedBox(
                         height: 5,
@@ -77,9 +79,15 @@ class _SwraScreenState extends State<SwraScreen> {
                           child: Container(
                             margin: EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
-                              swra,
-                              style: TextStyle(height: 2, fontSize: 20),
-                            ),
+                                swra,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .secondary,
+                                        height: 2)),
                           ),
                         ),
                       )

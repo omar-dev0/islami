@@ -34,7 +34,8 @@ class _HadethState extends State<Hadeth> {
                 decoration: BoxDecoration(
                     border: Border.symmetric(
                   horizontal: BorderSide(
-                      width: 3, color: Theme.of(context).primaryColor),
+                      width: 3,
+                      color: Theme.of(context).colorScheme.background),
                 )),
                 child: const Text(
                   'الأحاديث',

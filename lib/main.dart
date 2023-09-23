@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:islami/Thems/dark_them.dart';
+import 'package:islami/Thems/light_them.dart';
 import 'package:islami/home.dart';
 import 'package:islami/tabs/hadeth/hadeth-screen.dart';
 import 'package:islami/tabs/quran/swra_screen.dart';
@@ -15,30 +17,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-            scrolledUnderElevation: 0,
-            centerTitle: true,
-            backgroundColor: Colors.transparent,
-            titleTextStyle: TextStyle(
-                fontFamily: 'ElMessiri-SemiBold',
-                color: Colors.black,
-                fontSize: 30,
-                fontWeight: FontWeight.bold)),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            unselectedIconTheme: IconThemeData(size: 30),
-            selectedIconTheme: IconThemeData(size: 35, color: Colors.black),
-            selectedItemColor: Colors.black),
-        scaffoldBackgroundColor: Colors.transparent,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Color(0xFFB7935F),
-          primary: Color(0xFFB7935F),
-          onPrimary: Color(0xFF000000),
-          secondary: Color(0xFFB7935F),
-          onSecondary: Color(0xFFFFFFFF),
-        ),
-        useMaterial3: true,
-      ),
+      theme: LightThem.light,
+      darkTheme: DarkThem.dark,
+      themeMode: ThemeMode.dark,
       initialRoute: HomeScreen.route,
       routes: {
         HomeScreen.route: (context) => const HomeScreen(),

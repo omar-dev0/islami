@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:islami/Data/hadeth_data.dart';
+import 'package:islami/Thems/dark_them.dart';
 
 class HadethScreen extends StatelessWidget {
   const HadethScreen({super.key});
@@ -12,7 +13,9 @@ class HadethScreen extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/bglight.png'),
+              image: AssetImage(DarkThem.isDark
+                  ? 'assets/images/dark.png'
+                  : 'assets/images/bglight.png'),
               fit: BoxFit.cover)),
       child: Directionality(
         textDirection: TextDirection.rtl,
@@ -22,28 +25,20 @@ class HadethScreen extends StatelessWidget {
             automaticallyImplyLeading: true,
           ),
           body: Card(
-            color: Colors.white,
-            surfaceTintColor: Colors.white,
-            margin: EdgeInsets.only(top: 30, bottom: 100, right: 20, left: 20),
-            elevation: 1,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             child: Column(
               children: [
                 Text(
-                  data.hadethNumber,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 25,
-                  ),
-                ),
+                    data.hadethNumber,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.secondary)),
                 SizedBox(
                   height: 2,
                 ),
                 Container(
                   width: 240,
                   height: 1,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.background,
                 ),
                 SizedBox(
                   height: 5,
@@ -54,7 +49,9 @@ class HadethScreen extends StatelessWidget {
                       margin: EdgeInsets.symmetric(horizontal: 20),
                       child: Text(
                         data.hadeth,
-                        style: TextStyle(height: 2, fontSize: 20),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Theme.of(context).colorScheme.secondary,
+                            height: 2),
                       ),
                     ),
                   ),

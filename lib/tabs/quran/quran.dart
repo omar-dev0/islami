@@ -277,7 +277,7 @@ class Quran extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 2,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.background,
               ), // seprated
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 30),
@@ -298,7 +298,7 @@ class Quran extends StatelessWidget {
                     Container(
                       width: 2,
                       height: 40,
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.background,
                     ),
                     Expanded(
                         child: SizedBox(
@@ -317,7 +317,7 @@ class Quran extends StatelessWidget {
               Container(
                 width: double.infinity,
                 height: 2,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).colorScheme.background,
               ),
               Expanded(
                   child: ListView.builder(

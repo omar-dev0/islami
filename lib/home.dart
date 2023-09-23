@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:islami/Thems/dark_them.dart';
+import 'package:islami/radio/radio.dart';
 import 'package:islami/tabs/hadeth/hadeth_tab.dart';
 import 'package:islami/tabs/quran/quran.dart';
 import 'package:islami/tabs/sebha/sebha_tab.dart';
+import 'package:islami/tabs/settings%20/settings_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "homescreen";
@@ -46,16 +49,25 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         label: 'الراديو',
       ),
+      BottomNavigationBarItem(
+        backgroundColor: Theme.of(context).primaryColor,
+        icon: Icon(Icons.settings),
+        label: 'الاعدادات',
+      ),
     ];
     List<Widget> tabs = [
       Quran(),
       Hadeth(),
       TasbehTab(),
+      RadioTab(),
+      SettingsTab(),
     ];
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/bglight.png'),
+              image: AssetImage(DarkThem.isDark
+                  ? 'assets/images/dark.png'
+                  : 'assets/images/bglight.png'),
               fit: BoxFit.fill)),
       child: Directionality(
         textDirection: TextDirection.rtl,

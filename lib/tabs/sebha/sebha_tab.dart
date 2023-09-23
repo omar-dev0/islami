@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:islami/Thems/dark_them.dart';
 
 class TasbehTab extends StatefulWidget {
   @override
@@ -29,7 +30,9 @@ class _TasbehTabState extends State<TasbehTab> {
               child: AnimatedRotation(
                 turns: turn,
                 duration: Duration(milliseconds: 700),
-                child: Image.asset('assets/images/sebha.png'),
+                child: Image.asset(DarkThem.isDark
+                    ? 'assets/images/sebha_dark.png'
+                    : 'assets/images/sebha.png'),
               )),
           SizedBox(
             height: 30,
@@ -47,7 +50,7 @@ class _TasbehTabState extends State<TasbehTab> {
                     margin: EdgeInsets.only(top: 20, bottom: 20),
                     padding: EdgeInsets.all(30),
                     decoration: BoxDecoration(
-                      color: Color(0xFFD2B58A),
+                      color: Theme.of(context).primaryColor,
                       borderRadius: BorderRadius.circular(25),
                     ),
                     child: Text(
@@ -61,7 +64,8 @@ class _TasbehTabState extends State<TasbehTab> {
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: Theme.of(context).primaryColor),
+                          backgroundColor:
+                              Theme.of(context).colorScheme.background),
                       onPressed: () {
                         setState(() {
                           turn += 0.06;
@@ -82,7 +86,13 @@ class _TasbehTabState extends State<TasbehTab> {
                             EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         child: Text(
                           azkhar[zekhrNumber],
-                          style: TextStyle(fontSize: 25, color: Colors.white),
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall
+                              ?.copyWith(
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .onSecondary),
                         ),
                       ),
                     ),
