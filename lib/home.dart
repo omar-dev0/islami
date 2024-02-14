@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:islami/Thems/dark_them.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islami/provider/settings_provider.dart';
 import 'package:islami/radio/radio.dart';
 import 'package:islami/tabs/hadeth/hadeth_tab.dart';
 import 'package:islami/tabs/quran/quran.dart';
 import 'package:islami/tabs/sebha/sebha_tab.dart';
 import 'package:islami/tabs/settings%20/settings_tab.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String route = "homescreen";
@@ -26,33 +28,32 @@ class _HomeScreenState extends State<HomeScreen> {
         icon: ImageIcon(
           AssetImage('assets/icons/quran.png'),
         ),
-        label: 'القرآن',
+        label: AppLocalizations.of(context)?.quran,
       ),
       BottomNavigationBarItem(
         backgroundColor: Theme.of(context).primaryColor,
         icon: ImageIcon(
           AssetImage('assets/icons/hadeth.png'),
         ),
-        label: 'الحديث',
+        label: AppLocalizations.of(context)?.hadith,
       ),
       BottomNavigationBarItem(
         backgroundColor: Theme.of(context).primaryColor,
         icon: ImageIcon(
           AssetImage('assets/icons/sebha.png'),
         ),
-        label: 'السبحة',
-      ),
+          label: AppLocalizations.of(context)?.sebha),
       BottomNavigationBarItem(
         backgroundColor: Theme.of(context).primaryColor,
         icon: ImageIcon(
           AssetImage('assets/icons/radio.png'),
         ),
-        label: 'الراديو',
+        label: AppLocalizations.of(context)?.radio,
       ),
       BottomNavigationBarItem(
         backgroundColor: Theme.of(context).primaryColor,
         icon: Icon(Icons.settings),
-        label: 'الاعدادات',
+        label: AppLocalizations.of(context)?.settings,
       ),
     ];
     List<Widget> tabs = [
@@ -62,30 +63,25 @@ class _HomeScreenState extends State<HomeScreen> {
       RadioTab(),
       SettingsTab(),
     ];
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage(DarkThem.isDark
-                  ? 'assets/images/dark.png'
-                  : 'assets/images/bglight.png'),
-              fit: BoxFit.fill)),
-      child: Directionality(
-        textDirection: TextDirection.rtl,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text(
-              'إسلامي',
-            ),
+              image: AssetImage(settingsProvider.bgPath), fit: BoxFit.fill)),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            AppLocalizations.of(context)!.islami,
           ),
-          body: tabs[selected],
-          bottomNavigationBar: BottomNavigationBar(
-            items: items,
-            currentIndex: selected,
-            onTap: (index) {
-              selected = index;
-              setState(() {});
-            },
-          ),
+        ),
+        body: tabs[selected],
+        bottomNavigationBar: BottomNavigationBar(
+          items: items,
+          currentIndex: selected,
+          onTap: (index) {
+            selected = index;
+            setState(() {});
+          },
         ),
       ),
     );

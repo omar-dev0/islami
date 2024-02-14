@@ -1,25 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:islami/Thems/dark_them.dart';
 import 'package:islami/Thems/light_them.dart';
 import 'package:islami/home.dart';
+import 'package:islami/provider/settings_provider.dart';
 import 'package:islami/tabs/hadeth/hadeth-screen.dart';
 import 'package:islami/tabs/quran/swra_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => SettingsProvider(), child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: LightThem.light,
       darkTheme: DarkThem.dark,
-      themeMode: ThemeMode.dark,
+      themeMode: settingsProvider.currentTheme,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: Locale(settingsProvider.currentLang),
       initialRoute: HomeScreen.route,
       routes: {
         HomeScreen.route: (context) => const HomeScreen(),
