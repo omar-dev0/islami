@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
 
+import '../Data/local_data.dart';
+
 class SettingsProvider extends ChangeNotifier {
-  ThemeMode currentTheme = ThemeMode.light;
-  String sebhaPath = 'assets/images/sebha.png';
-  String bgPath = 'assets/images/bglight.png';
-  String currentLang = 'ar';
+  late ThemeMode currentTheme;
+  late String sebhaPath;
+  late String bgPath;
+  late String currentLang;
+
+  setItems() async {
+    if (await isDark()) {
+      currentTheme = ThemeMode.dark;
+      sebhaPath = 'assets/images/sebha_dark.png';
+      bgPath = 'assets/images/dark.png';
+    } else {
+      currentTheme = ThemeMode.light;
+      sebhaPath = 'assets/images/sebha.png';
+      bgPath = 'assets/images/bglight.png';
+    }
+    if (await isArabic()) {
+      currentLang = 'ar';
+    } else {
+      currentLang = 'en';
+    }
+  }
 
   void changeTheme(ThemeMode wantedTheme) {
     if (currentTheme == wantedTheme) {
@@ -14,9 +33,11 @@ class SettingsProvider extends ChangeNotifier {
     if (currentTheme == ThemeMode.dark) {
       sebhaPath = 'assets/images/sebha_dark.png';
       bgPath = 'assets/images/dark.png';
+      LocalData.setTheme(true);
     } else {
       sebhaPath = 'assets/images/sebha_dark.png';
       bgPath = 'assets/images/bglight.png';
+      LocalData.setTheme(false);
     }
     notifyListeners();
   }
@@ -26,6 +47,21 @@ class SettingsProvider extends ChangeNotifier {
       return;
     }
     currentLang = wantedLang;
+    if (currentLang == 'ar') {
+      LocalData.setLang(true);
+    } else {
+      LocalData.setLang(false);
+    }
     notifyListeners();
+  }
+
+  Future<bool> isDark() async {
+    bool theme = await LocalData.getTheme() ?? false;
+    return theme;
+  }
+
+  Future<bool> isArabic() async {
+    bool lang = await LocalData.getLang() ?? false;
+    return lang;
   }
 }

@@ -8,9 +8,12 @@ import 'package:islami/tabs/hadeth/hadeth-screen.dart';
 import 'package:islami/tabs/quran/swra_screen.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SettingsProvider settingsProvider = SettingsProvider();
+  await settingsProvider.setItems();
   runApp(ChangeNotifierProvider(
-      create: (context) => SettingsProvider(), child: MyApp()));
+      create: (context) => settingsProvider, child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -23,7 +26,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+    SettingsProvider settingsProvider =
+        Provider.of<SettingsProvider>(context, listen: true);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: LightThem.light,
