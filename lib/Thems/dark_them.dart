@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DarkThem {
-  static bool isDark = true;
+  static bool isDark = false;
   static ThemeData dark = ThemeData(
       cardTheme: CardTheme(
         color: Color(0xFF141A2E),

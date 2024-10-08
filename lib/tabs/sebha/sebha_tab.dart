@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:islami/Thems/dark_them.dart';
+import 'package:islami/provider/settings_provider.dart';
+import 'package:provider/provider.dart';
 
 class TasbehTab extends StatefulWidget {
   @override
@@ -17,9 +18,9 @@ class _TasbehTabState extends State<TasbehTab> {
     'اللهم صلِ على سيدنا محمد و على آله و صحبه أجمعين',
   ];
   int zekhrNumber = 0;
-
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Column(
@@ -30,9 +31,7 @@ class _TasbehTabState extends State<TasbehTab> {
               child: AnimatedRotation(
                 turns: turn,
                 duration: Duration(milliseconds: 700),
-                child: Image.asset(DarkThem.isDark
-                    ? 'assets/images/sebha_dark.png'
-                    : 'assets/images/sebha.png'),
+                child: Image.asset(settingsProvider.sebhaPath),
               )),
           SizedBox(
             height: 30,
@@ -65,7 +64,7 @@ class _TasbehTabState extends State<TasbehTab> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor:
-                              Theme.of(context).colorScheme.background),
+                          Theme.of(context).colorScheme.background),
                       onPressed: () {
                         setState(() {
                           turn += 0.06;
@@ -83,16 +82,16 @@ class _TasbehTabState extends State<TasbehTab> {
                       },
                       child: Padding(
                         padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                         child: Text(
                           azkhar[zekhrNumber],
                           style: Theme.of(context)
                               .textTheme
                               .bodySmall
                               ?.copyWith(
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .onSecondary),
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onSecondary),
                         ),
                       ),
                     ),
