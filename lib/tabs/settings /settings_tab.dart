@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:islami/provider/settings_provider.dart';
 import 'package:islami/tabs/settings%20/lang_button_sheet.dart';
 import 'package:islami/tabs/settings%20/them_button_sheet.dart';
+import 'package:provider/provider.dart';
 
 class SettingsTab extends StatefulWidget {
   const SettingsTab({super.key});
@@ -12,13 +15,14 @@ class SettingsTab extends StatefulWidget {
 class _SettingsTabState extends State<SettingsTab> {
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
     return Container(
       padding: const EdgeInsets.only(top: 100, left: 20, right: 20, bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'المظهر',
+            AppLocalizations.of(context)!.theme,
             style: Theme.of(context).textTheme.labelLarge,
           ),
           InkWell(
@@ -34,7 +38,9 @@ class _SettingsTabState extends State<SettingsTab> {
                       width: 3),
                   borderRadius: BorderRadius.circular(20)),
               child: Text(
-                'فاتح',
+                settingsProvider.currentTheme == ThemeMode.dark
+                    ? AppLocalizations.of(context)!.dark
+                    : AppLocalizations.of(context)!.light,
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
@@ -43,7 +49,7 @@ class _SettingsTabState extends State<SettingsTab> {
             height: 10,
           ),
           Text(
-            'اللغة',
+            AppLocalizations.of(context)!.language,
             style: Theme.of(context).textTheme.labelLarge,
           ),
           InkWell(
@@ -59,7 +65,9 @@ class _SettingsTabState extends State<SettingsTab> {
                       width: 3),
                   borderRadius: BorderRadius.circular(20)),
               child: Text(
-                'العربية',
+                settingsProvider.currentLang == 'ar'
+                    ? AppLocalizations.of(context)!.arabic
+                    : AppLocalizations.of(context)!.english,
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
